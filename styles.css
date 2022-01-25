@@ -1,0 +1,212 @@
+*,
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --primaryColor: #000616;
+    --secondaryColor: #000711;
+    --mainOrange: #ff6600;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: mandatory 30px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--primaryColor);
+}
+
+header div {
+    position: relative;
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+header nav {
+    /* float: right; */
+    padding-right: 3em;
+}
+
+header nav ul {
+    display: flex;
+    list-style: none;
+}
+
+header nav li {
+    padding-right: 1em;
+    color: #fff;
+}
+
+body {
+    background-color: var(--primaryColor);
+    min-height: 200vh;
+    font-family: 'Nunito', serif;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1 {
+    font-family: 'Francois One', serif;
+    font-style: oblique;
+}
+
+main {
+    color: #fff;
+}
+
+h1,
+main h2 {
+    background: linear-gradient(to right, var(--mainOrange), #c7035e);
+    width: fit-content;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+main h2 {
+    font-family: 'Francois One', serif;
+    padding: 1em 0;
+    position: relative;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+main h2::after,
+main h2::before {
+    position: absolute;
+    font-size: 3rem;
+    color: rgba(204, 204, 204, 0.589);
+    z-index: -1;
+}
+
+main h2::after {
+    content: '</>';
+    bottom: 0;
+    left: 52%;
+}
+
+main h2::before {
+    content: '<>';
+    top: 0;
+    right: 52%;
+}
+
+#hero {
+    min-height: 100vh;
+    background-size: 100% 100%;
+    color: #fff;
+    line-height: 2;
+    background-color: var(--secondaryColor);
+}
+
+#hero h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+#hero p {
+    font-size: 1.3rem;
+}
+
+#hero button {
+    padding: 1.2em 2em;
+    margin-top: 1em;
+    background-color: var(--mainOrange);
+    border-radius: 4px;
+}
+
+#about section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#about img {
+    width: 250px;
+    height: 280px;
+    position: relative;
+    border-radius: 4px;
+}
+
+#about img::after {
+    position: absolute;
+    content: '';
+    top: 10px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    background-color: red;
+    z-index: 5;
+    border: 3px solid var(--mainOrange);
+}
+
+#about p {
+    max-width: 450px;
+    padding: 0 2em;
+}
+
+.skillset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-top: 1em;
+}
+
+.skillset article {
+    background-color: var(--secondaryColor);
+    width: 300px;
+    min-height: 200px;
+    margin-right: 1em;
+    padding: 1em;
+    box-shadow: .5px .5px 1px 0px #ccc, inset 1px 1px 1px #ccc;
+}
+
+.skillset ul {
+    list-style-type: square;
+    padding: 1em 0 0 1em;
+}
+
+.my-projects {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.my-projects article {
+    width: 300px;
+    min-height: 250px;
+    margin-bottom: 1em;
+    background-color: var(--secondaryColor);
+    padding: 1em;
+}
