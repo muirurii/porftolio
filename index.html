@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Francois+One&family=Nunito:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&family=Nunito:wght@200&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="../fonts/css/all.css">
     <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
     <title>Peter</title>
 </head>
 
@@ -37,10 +39,10 @@
                     <p>
                         A frontend web developer.
                     </p>
-                    <button>Hire Me</button>
+                    <button>Hire Me <i class="fas fa-long-arrow-alt-right"></i></button>
                 </section>
             </section>
-            <section id="about">
+            <section id="about" data-aos="flip-left">
                 <div class="center">
                     <h2>About Me</h2>
                 </div>
@@ -55,11 +57,28 @@
                     </p>
                 </section>
             </section>
-            <section id="skills">
+            <section id="skills" data-aos="flip-left">
                 <div class="center">
                     <h2>Skills</h2>
                 </div>
                 <section class="skillset">
+                    <article>
+                        <div>
+                            <i class="fas fa-desktop"></i>
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Web Design</h3>
+                    </article>
+                    <article>
+                        <i class="fas fa-globe"></i>
+                        <h3>Web Development</h3>
+                    </article>
+                    <article>
+                        <i class="fas fa-satellite"></i>
+                        <h3>API</h3>
+                    </article>
+                </section>
+                <section class="tools">
                     <article>
                         <h3>Technologies</h3>
                         <ul>
@@ -78,7 +97,7 @@
                     </article>
                 </section>
             </section>
-            <section id="projects">
+            <section id="projects" data-aos="flip-left">
                 <div class="center">
                     <h2>Recent Projects</h2>
                 </div>
@@ -121,7 +140,7 @@
                     </article>
                 </section>
             </section>
-            <section id="contacts">
+            <section id="contacts" data-aos="flip-left">
                 <div class="center">
                     <h2>Lets connect...</h2>
                 </div>
@@ -160,6 +179,7 @@
         <footer class="center">
             <p>Peter Ngugi Copyright &copy; 2022</p>
         </footer>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     </body>
 </body>
 

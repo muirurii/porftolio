@@ -50,6 +50,7 @@ header nav li {
 }
 
 .contact {
+    background-color: var(--mainOrange);
     padding: .8em 1em;
 }
 
@@ -69,6 +70,7 @@ button {
     border: none;
     cursor: pointer;
     font-family: inherit;
+    border-radius: 4px;
 }
 
 a {
@@ -77,7 +79,7 @@ a {
 }
 
 h1 {
-    font-family: 'Francois One', serif;
+    font-family: 'Mochiy Pop P One', serif;
 }
 
 main {
@@ -99,7 +101,7 @@ main h2,
 }
 
 main h2 {
-    font-family: 'Francois One', serif;
+    font-family: 'Mochiy Pop P One', serif;
     padding: 1em 0;
     position: relative;
     font-weight: bold;
@@ -143,15 +145,28 @@ main h2::before {
     font-size: 1.3rem;
 }
 
-#hero button,
-.contact {
-    background-color: var(--mainOrange);
-    border-radius: 4px;
+#hero button {
+    padding: 1.2em 3em;
+    margin-top: 1em;
+    background: var(--gradient);
+    color: #fff;
+    transition: 400ms ease-in-out;
 }
 
-#hero button {
-    padding: 1.2em 2em;
-    margin-top: 1em;
+#hero i {
+    transform: scaleX(2) translateX(4px);
+    animation: slide 2s infinite linear alternate;
+}
+
+@keyframes slide {
+    to {
+        transform: scaleX(2) translateX(6px);
+    }
+}
+
+#hero button:hover {
+    background: #fff;
+    color: var(--primaryColor);
 }
 
 #about section {
@@ -187,21 +202,71 @@ main h2::before {
     padding: 0 2em;
 }
 
-.skillset {
+.skillset,
+.tools {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.skillset {
+    padding: 2em 0;
+}
+
+.skillset article {
+    background-color: var(--secondaryColor);
+    width: 200px;
+    height: 150px;
+    padding: 2em 0;
+    margin-right: 50px;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: relative;
+    transition: 300ms 200ms ease-in-out;
+    cursor: pointer;
+    border: 1px solid var(--mainOrange);
+}
+
+.skillset article::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    z-index: -1;
+    transform: scale(0);
+    transition: 400ms ease-in-out;
+    border-radius: inherit;
+}
+
+.skillset article:hover {
+    background-color: transparent;
+    color: var(--primaryColor);
+    border-color: transparent;
+}
+
+.skillset article:hover::after {
+    transform: scale(1);
+}
+
+.tools {
     padding-top: 1em;
 }
 
-.skillset h3 {
+.tools h3 {
     position: relative;
     text-align: center;
     padding: .5em 0;
 }
 
-.skillset h3::after {
+.tools h3::after {
     content: '';
     position: absolute;
     bottom: -1px;
@@ -211,7 +276,7 @@ main h2::before {
     background: var(--gradient);
 }
 
-.skillset article {
+.tools article {
     background-color: var(--secondaryColor);
     width: 301px;
     min-height: 200px;
@@ -220,8 +285,8 @@ main h2::before {
     cursor: pointer;
 }
 
-.skillset article::after,
-.skillset article::before {
+.tools article::after,
+.tools article::before {
     content: '';
     position: absolute;
     z-index: -1;
@@ -233,19 +298,19 @@ main h2::before {
     background: var(--gradient);
 }
 
-.skillset article::before {
+.tools article::before {
     transform: scaleX(0);
 }
 
-.skillset article:hover::after {
+.tools article:hover::after {
     transform: scaleY(0);
 }
 
-.skillset article:hover::before {
+.tools article:hover::before {
     transform: scaleY(1);
 }
 
-.skillset ul {
+.tools ul {
     list-style-type: square;
     list-style-position: inside;
     padding: 1em 0 0 1em;
@@ -273,6 +338,11 @@ main h2::before {
     position: relative;
     border: 1px solid var(--mainOrange);
     border-radius: 4px;
+    transition: transform 500ms ease-in-out;
+}
+
+.my-projects article:hover {
+    transform: translateY(-4px);
 }
 
 .my-projects img {
@@ -361,13 +431,13 @@ form label {
 }
 
 form input {
-    width: 60%;
     height: 30px;
-    border-radius: 4px;
 }
 
 form input,
 form textarea {
+    width: 60%;
+    border-radius: 4px;
     padding-left: 1em;
     caret-color: var(--mainOrange);
     border: none;
