@@ -505,10 +505,41 @@ form textarea {
 
 form button {
     display: block;
+    width: 60%;
     padding: 1em 3em;
     background-color: var(--mainOrange);
-    border-radius: 3px;
+    border-radius: 10px;
     margin-top: 1em;
+}
+
+form button.sending {
+    opacity: .7;
+}
+
+form button.sent {
+    background-color: green;
+}
+
+.sent,
+.sending {
+    transform: translateY(10px);
+    animation: change 400ms ease-in-out forwards;
+    pointer-events: none;
+}
+
+.not-sent {
+    background-color: #ff0000;
+}
+
+@keyframes change {
+    to {
+        transform: translateY(0px)
+    }
+}
+
+form button:hover::after {
+    transform: rotateX(0deg);
+    color: #fff;
 }
 
 footer {

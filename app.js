@@ -23,12 +23,6 @@
     const reply_to = document.getElementById('email');
     const message = document.getElementById('message');
 
-
-    // const validateFunction = () => {
-    //     !from_name.value.length ? from_name.parentElement.classList.add('error') : from_name.parentElement.classList.remove('error');
-    //     !message.value.length ? message.parentElement.classList.add('error') : message.parentElement.classList.remove('error');
-    //     !emailRegex(reply_to.value) ? reply_to.parentElement.classList.add('error') : reply_to.parentElement.classList.remove('error');
-    // }
     const validateTexts = (element) => {
         if (!element.value.length) {
             element.parentElement.classList.add('error');
@@ -63,18 +57,36 @@
 
         if (!checkEmail || !checkMessage || !validateName) return;
 
-        var templateParams = {
+        const templateParams = {
             from_name: from_name.value,
             message: message.value,
             reply_to: reply_to.value,
             to_name: "Peter"
         };
 
+        const sendButton = e.target.querySelector('button');
+        sendButton.className = "sending";
+        sendButton.textContent = "Sending";
+        const checkIcon = sendButton.getAttribute('data-check')
 
-        // emailjs.send("service_5r0rlgk", "template_c7rtf6r", templateParams)
-        //     .then(function(response) {
-        //         console.log('SUCCESS!', response.status, response.text);
-        //     }, function(error) {
-        //         console.log('FAILED...', error);
-        //     });
+        reply_to.value = '';
+        message.value = '';
+        from_name.value = '';
+
+        emailjs.send("service_5r0rlgk", "template_c7rtf6r", templateParams)
+            .then(() => {
+                sendButton.className = "sent";
+                sendButton.textContent = `Sent ${checkIcon}`;
+                setTimeout(() => {
+                    sendButton.className = "";
+                    sendButton.textContent = "Send";
+                }, 3000);
+            }, () => {
+                sendButton.className = "not-sent";
+                sendButton.textContent = "Unable to send message";
+                setTimeout(() => {
+                    sendButton.className = "";
+                    sendButton.textContent = "Send";
+                }, 3000);
+            });
     })
