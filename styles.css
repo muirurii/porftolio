@@ -340,7 +340,7 @@ main h2::before {
 
 .my-projects {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     place-items: center;
 }
 
@@ -470,6 +470,8 @@ form label {
     display: block;
     padding: .8em 0;
     cursor: pointer;
+    --warning: "Error";
+    position: relative;
 }
 
 form input {
@@ -481,9 +483,24 @@ form textarea {
     width: 60%;
     border-radius: 4px;
     padding-left: 1em;
+    margin-top: .5em;
     caret-color: var(--mainOrange);
-    border: none;
+    border: 1px solid transparent;
     outline: transparent;
+}
+
+.group.error input,
+.group.error textarea {
+    border-color: #ff0000;
+}
+
+.group.error label::after {
+    content: 'The ' attr(data-name) ' you entered is not valid';
+    position: absolute;
+    bottom: 0px;
+    left: 1em;
+    font-size: .7rem;
+    color: #ff0000;
 }
 
 form button {
