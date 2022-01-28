@@ -6,16 +6,6 @@
         mirror: true
     });
 
-    //Hero text animation
-    const allTexts = document.querySelectorAll('.texts p');
-
-    const rotateTexts = () => {
-        const active = document.querySelector('.active');
-        active.classList.remove('active');
-        active.nextElementSibling ? active.nextElementSibling.classList.add('active') : allTexts[0].classList.add('active');
-    }
-    setInterval(() => rotateTexts(), 3000);
-
     //Send Mail
 
 
@@ -24,7 +14,7 @@
     const message = document.getElementById('message');
 
     const validateTexts = (element) => {
-        if (!element.value.length) {
+        if (!element.value.trim().length) {
             element.parentElement.classList.add('error');
             return false;
         } else {
@@ -89,4 +79,15 @@
                     sendButton.textContent = "Send";
                 }, 3000);
             });
-    })
+    });
+
+    //Header
+
+    const header = document.querySelector('header');
+    const mark = document.querySelector('.mark');
+    const headerObserver = new IntersectionObserver(entry => {
+        console.log(entry[0].isIntersecting);
+        !entry[0].isIntersecting ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+    });
+
+    headerObserver.observe(mark)

@@ -18,13 +18,36 @@ html {
     scroll-snap-type: mandatory 30px;
 }
 
+body {
+    background-color: var(--primaryColor);
+    min-height: 200vh;
+    font-family: 'Nunito', serif;
+    position: relative;
+    overflow-x: hidden;
+}
+
 header {
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100vw;
     backdrop-filter: blur(5px);
     border-bottom: 1px solid var(--primaryColor);
     z-index: 100;
+    transition: 1s;
+}
+
+header.scrolled {
+    position: fixed;
+    background-color: #fff;
+    transform: rotateX(90deg);
+    animation: header 300ms forwards ease-in-out;
+    transform-origin: bottom;
+}
+
+@keyframes header {
+    to {
+        transform: rotateX(0deg);
+    }
 }
 
 header div {
@@ -49,15 +72,18 @@ header nav li {
     color: #fff;
 }
 
+.scrolled li {
+    color: #000616;
+}
+
 .contact {
     background-color: var(--mainOrange);
     padding: .8em 1em;
 }
 
-body {
-    background-color: var(--primaryColor);
-    min-height: 200vh;
-    font-family: 'Nunito', serif;
+.mark {
+    position: relative;
+    top: -9vh;
 }
 
 .center {
@@ -134,6 +160,7 @@ main h2::before {
     color: #fff;
     line-height: 2;
     background-color: var(--secondaryColor);
+    position: relative;
 }
 
 #hero h3 {
@@ -153,15 +180,8 @@ main h2::before {
     transition: 400ms ease-in-out;
 }
 
-#hero i {
+#hero .fa-long-arrow-alt-right {
     transform: scaleX(2) translateX(4px);
-    animation: slide 2s infinite linear alternate;
-}
-
-@keyframes slide {
-    to {
-        transform: scaleX(2) translateX(6px);
-    }
 }
 
 #hero button:hover {
@@ -169,26 +189,18 @@ main h2::before {
     color: var(--primaryColor);
 }
 
-.texts {
-    position: relative;
-    min-height: 1rem;
-}
-
-.texts p {
+.arrow {
     position: absolute;
-    left: 20px;
-    bottom: -2px;
-    transform: rotateX(90deg);
-    transition: transform 900ms ease-in-out;
+    bottom: 20px;
+    right: 50%;
+    transform: scale(2) translateX(-50%);
+    animation: slide 1s infinite linear alternate;
 }
 
-.texts label,
-.texts p {
-    font-size: 1rem;
-}
-
-.texts p.active {
-    transform: rotateX(0deg);
+@keyframes slide {
+    to {
+        transform: scale(2) translate(-50%, 6px);
+    }
 }
 
 #about section {
@@ -475,7 +487,7 @@ form label {
 }
 
 form input {
-    height: 30px;
+    height: 35px;
 }
 
 form input,
@@ -487,11 +499,25 @@ form textarea {
     caret-color: var(--mainOrange);
     border: 1px solid transparent;
     outline: transparent;
+    font-family: inherit;
 }
 
 .group.error input,
 .group.error textarea {
     border-color: #ff0000;
+    animation: vibrate 200ms ease-in-out forwards 3;
+}
+
+@keyframes vibrate {
+    0% {
+        transform: translateX(5px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
 }
 
 .group.error label::after {
