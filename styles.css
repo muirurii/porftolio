@@ -31,7 +31,6 @@ header {
     top: 0;
     width: 100vw;
     backdrop-filter: blur(5px);
-    border-bottom: 1px solid var(--primaryColor);
     z-index: 100;
     transition: 1s;
 }
@@ -50,7 +49,7 @@ header.scrolled {
     }
 }
 
-header div {
+header .tittle {
     position: relative;
     min-height: 10vh;
     display: flex;
@@ -73,7 +72,7 @@ header nav li {
 }
 
 .scrolled li {
-    color: #000616;
+    color: var(--primaryColor);
 }
 
 .contact {
@@ -108,6 +107,79 @@ h1 {
     font-family: 'Mochiy Pop P One', serif;
 }
 
+.small-menu {
+    background-color: var(--secondaryColor);
+    position: fixed;
+    top: 10vh;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 210;
+    padding: 2em;
+    color: #fff;
+    transform: translateX(110vw);
+    transition: transform 400ms ease-in-out;
+    display: none;
+}
+
+.small-menu ul {
+    list-style: none;
+}
+
+.small-menu.show {
+    transform: translateX(0vw);
+}
+
+.hamb {
+    background: var(--gradient);
+    width: 30px;
+    height: 4px;
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+    cursor: pointer;
+    display: none;
+}
+
+.hamb::after,
+.hamb::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    transition: transform 300ms ease-in-out;
+}
+
+.hamb::after {
+    top: -6px;
+}
+
+.hamb::before {
+    bottom: -6px;
+}
+
+.hamb.closed {
+    background: transparent;
+}
+
+.hamb.closed::after,
+.hamb.closed::before {
+    height: 60%;
+    width: 75%;
+    top: 0px;
+    bottom: 0px;
+    background-color: #df0000;
+}
+
+.hamb.closed::after {
+    transform: rotate(45deg);
+}
+
+.hamb.closed::before {
+    transform: rotate(-45deg);
+}
+
 main {
     color: #fff;
 }
@@ -118,7 +190,8 @@ main>section {
 
 h1,
 main h2,
-.social-icons i {
+.social-icons i,
+.contact-heading {
     background: var(--gradient);
     width: fit-content;
     -webkit-text-fill-color: transparent;
@@ -129,29 +202,8 @@ main h2,
 main h2 {
     font-family: 'Mochiy Pop P One', serif;
     padding: 1em 0;
-    position: relative;
     font-weight: bold;
     font-size: 1.5rem;
-}
-
-main h2::after,
-main h2::before {
-    position: absolute;
-    font-size: 3rem;
-    color: rgba(204, 204, 204, 0.589);
-    z-index: -1;
-}
-
-main h2::after {
-    content: '</>';
-    bottom: 0;
-    left: 52%;
-}
-
-main h2::before {
-    content: '<>';
-    top: 0;
-    right: 52%;
 }
 
 #hero {
@@ -161,6 +213,7 @@ main h2::before {
     line-height: 2;
     background-color: var(--secondaryColor);
     position: relative;
+    padding: 1em;
 }
 
 #hero h3 {
@@ -170,6 +223,12 @@ main h2::before {
 
 #hero p {
     font-size: 1.3rem;
+}
+
+#hero .highlight {
+    font-size: 2rem;
+    color: var(--mainOrange);
+    font-weight: bold;
 }
 
 #hero button {
@@ -203,37 +262,10 @@ main h2::before {
     }
 }
 
-#about section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-#about img {
-    width: 250px;
-    height: 280px;
-    position: relative;
-    border-radius: 4px;
-}
-
-#about img::after {
-    position: absolute;
-    content: '';
-    top: 10px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 30px;
-    width: 100%;
-    background-color: red;
-    z-index: 5;
-    border: 3px solid var(--mainOrange);
-}
-
 #about p {
-    max-width: 450px;
+    max-width: 500px;
     padding: 0 2em;
+    text-align: center;
 }
 
 .skillset,
@@ -253,7 +285,7 @@ main h2::before {
     width: 200px;
     height: 150px;
     padding: 2em 0;
-    margin-right: 50px;
+    margin: 0 50px 50px 0;
     border-radius: 20px;
     overflow: hidden;
     display: flex;
@@ -314,7 +346,7 @@ main h2::before {
     background-color: var(--secondaryColor);
     width: 301px;
     min-height: 200px;
-    margin-right: 1em;
+    margin: 0 10px 50px 0;
     position: relative;
     cursor: pointer;
 }
@@ -357,8 +389,6 @@ main h2::before {
 }
 
 .my-projects h3 {
-    /* text-decoration: underline;
-    text-decoration-color: var(--mainOrange); */
     padding-bottom: 1em;
     z-index: 3;
 }
@@ -398,7 +428,7 @@ main h2::before {
     height: 100%;
     top: 0;
     left: 0;
-    backdrop-filter: drop-shadow(4px 4px 10px blue);
+    backdrop-filter: drop-shadow(4px 4px 10px var(--mainOrange));
     pointer-events: none;
     z-index: 2;
     transition: 400ms ease-in-out;
@@ -407,14 +437,14 @@ main h2::before {
 
 .my-projects article::before {
     clip-path: polygon(0 0, 100% 0, 0% 100%);
-    background-color: rgba(219, 253, 245, 0.178);
+    background-color: #dbfdf52d;
     transform-origin: left;
 }
 
 .my-projects article::after {
     clip-path: polygon(100% 100%, 100% 0, 0% 100%);
     transform-origin: right;
-    background-color: rgba(1, 2, 31, 0.541);
+    background-color: #01021f8a;
 }
 
 .my-projects a {
@@ -462,9 +492,18 @@ main h2::before {
     grid-template-columns: repeat(2, 1fr);
 }
 
+.contacts-details>section,
+form {
+    padding-left: 2em;
+}
+
+.contact-heading {
+    padding: 2em 0;
+}
+
 .social-icons {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     line-height: 2;
 }
 
@@ -543,7 +582,7 @@ form button.sending {
 }
 
 form button.sent {
-    background-color: green;
+    background-color: #008000;
 }
 
 .sent,
@@ -572,4 +611,51 @@ footer {
     min-height: 50px;
     background-color: var(--primaryColor);
     color: #fff;
+}
+
+@media (max-width:700px) {
+    .my-projects,
+    .contacts-details {
+        grid-template-columns: 1fr;
+    }
+    .contacts-details {
+        place-items: center;
+    }
+    form,
+    .social-icons {
+        width: 400px;
+        margin: 2em 0;
+    }
+    form input,
+    form textarea,
+    form button {
+        width: 90%;
+    }
+    .social-icons {
+        justify-content: start;
+    }
+    header nav {
+        display: none;
+    }
+    header h1 {
+        position: absolute;
+        left: 1em;
+        top: 0em;
+    }
+    .small-menu {
+        display: block;
+    }
+    .hamb {
+        display: block;
+    }
+}
+
+@media (max-width:400px) {
+    form,
+    .social-icons {
+        width: 300px;
+    }
+    .arrow {
+        display: none;
+    }
 }

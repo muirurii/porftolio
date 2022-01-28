@@ -19,8 +19,10 @@
 
 <body>
     <header>
-        <div>
-            <h1>PN</h1>
+        <div class="tittle">
+            <a href="#">
+                <h1>PN</h1>
+            </a>
             <nav>
                 <ul>
                     <li><a href="#">Home</a></li>
@@ -31,16 +33,29 @@
                 </ul>
             </nav>
         </div>
+        <div class="hamb"></div>
     </header>
 
     <body>
+        <div class="small-menu">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contacts">Contacts</a></li>
+            </ul>
+        </div>
         <main>
             <section id="hero" class="center">
                 <section>
                     <div class="mark"></div>
                     <h3> I am Peter Ngugi.</h3>
-                    <p>
+                    <p class="highlight">
                         A frontend website developer.
+                    </p>
+                    <p>
+                        I design and develop scalable and appealing websites <br/> that are responsive across all devices.
                     </p>
                     <button>Hire Me <i class="fas fa-long-arrow-alt-right"></i></button>
                     <div class="arrow">
@@ -48,22 +63,19 @@
                     </div>
                 </section>
             </section>
-            <section id="about" data-aos="zoom-out-left">
+            <section id="about" data-aos="fade-down">
                 <div class="center">
                     <h2>About Me</h2>
                 </div>
-                <section>
-                    <figure>
-                        <img src="./images/profile.jpg" alt="">
-                    </figure>
+                <section class="center">
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius hic cumque atque, vitae enim quaerat modi non quam, maxime veritatis dolor at iusto repudiandae. Impedit repudiandae delectus recusandae eveniet rerum tempore vitae nulla iste quis, provident
-                        alias fuga deleniti, mollitia, dolorum quas obcaecati quam veritatis. Lorem ipsum dolor sit amet consectetur . <br> Dipisicing elit. Eius hic cumque atque, vitae enim quaerat modi non quam. Lecusandae eveniet
-                        rerum tempore vitae nulla iste quis, provident alias fuga deleniti, mollitia, dolorum quas obcaecati quam veritatis.
+                        I am Peter Ngugi a frontend website developer from Kenya. <br /> Currently I am an undegraduate student pursuing a degree in Information Science. <br/> I have a great passion in software development and I'm always ready to learn,practice
+                        and gain new ideas as they come my way. <br /> I'm open for freelancing and internship as I widen my knowledge on website development. <br/> I also would like to collaborate on projects in order to gain experience in teamwork and
+                        also connect, share and gain knowledge from other developers.
                     </p>
                 </section>
             </section>
-            <section id="skills" data-aos="zoom-out-left">
+            <section id="skills" data-aos="fade-down">
                 <div class="center">
                     <h2>Skills</h2>
                 </div>
@@ -104,7 +116,7 @@
                     </article>
                 </section>
             </section>
-            <section id="projects" data-aos="zoom-out-left">
+            <section id="projects" data-aos="fade-down">
                 <div class="center">
                     <h2>Recent Projects</h2>
                 </div>
@@ -117,49 +129,53 @@
                     </article>
                     <article>
                         <h3>English dictionary</h3>
-                        <img src="./images/projects/dictionary.png" alt="Project photo">
+                        <img src="https://images.pexels.com/photos/8296035/pexels-photo-8296035.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Project photo">
                         <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/dictionary/" class="live">Live Site &UpperRightArrow;</a>
                         <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/dictionary/" class="code">Code</a>
                     </article>
                     <article>
                         <h3>Css pendulum</h3>
-                        <img src="./images/projects/pendulum.png" alt="Project photo">
+                        <img src="https://images.pexels.com/photos/7307584/pexels-photo-7307584.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Project photo">
                         <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/pendulum/" class="live">Live Site &UpperRightArrow;</a>
                         <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/pendulum" class="code">Code</a>
                     </article>
                     <article>
                         <h3>Grocery store website</h3>
-                        <img src="./images/projects/grocery.png" alt="Project photo">
+                        <img src="https://images.pexels.com/photos/375897/pexels-photo-375897.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Project photo">
                         <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/grocery/" class="live">Live Site &UpperRightArrow;</a>
                         <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/grocery" class="code">Code</a>
                     </article>
                 </section>
             </section>
-            <section id="contacts" data-aos="zoom-out-left">
+            <section id="contacts" data-aos="fade-down">
                 <div class="center">
                     <h2>Lets connect...</h2>
                 </div>
                 <section class="contacts-details">
-                    <section class="social-icons">
-                        <section>
-                            <div>
-                                <a href="https://github.com/muirurii" target="_blank" referrerpolicy="no-referrer"><i class="fab fa-github"></i></a>
-                                <a href="#"><i class="fab fa-instagram"></i></a>
-                                <a href="https://twitter.com/dronethem" target="_blank" referrerpolicy="no-referrer"><i class="fab fa-twitter"></i></a>
-                            </div>
-                            <div>
-                                <a href="mailto:pnkanuna@gmail.com"><i class="fas fa-envelope"></i><span>pnkanuna@gmail.com</span></a>
-                            </div>
-                            <div>
-                                <a href="tel:+254703259558"><i class="fas fa-phone"></i><span>+254703259558</span></a>
-                            </div>
-                            <div>
-                                <i class="fas fa-map-marker-alt"></i><span>Nairobi,Kenya</span>
-                            </div>
+                    <section>
+                        <h3 class="contact-heading">Contacts</h3>
+                        <section class="social-icons">
+                            <section>
+                                <div>
+                                    <a href="https://github.com/muirurii" target="_blank" referrerpolicy="no-referrer"><i class="fab fa-github"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://twitter.com/dronethem" target="_blank" referrerpolicy="no-referrer"><i class="fab fa-twitter"></i></a>
+                                </div>
+                                <div>
+                                    <a href="mailto:pnkanuna@gmail.com"><i class="fas fa-envelope"></i><span>pnkanuna@gmail.com</span></a>
+                                </div>
+                                <div>
+                                    <a href="tel:+254703259558"><i class="fas fa-phone"></i><span>+254703259558</span></a>
+                                </div>
+                                <div>
+                                    <i class="fas fa-map-marker-alt"></i><span>Nairobi,Kenya</span>
+                                </div>
+                            </section>
                         </section>
                     </section>
 
                     <form>
+                        <h3 class="contact-heading">Send me a message</h3>
                         <div class="group">
                             <label for="name" data-name="name">Name</label>
                             <input type="text" id="name" placeholder="Enter your name">

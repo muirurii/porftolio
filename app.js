@@ -2,6 +2,7 @@
     AOS.init({
         offset: 200,
         duration: 800,
+        delay: 50,
         easing: "ease-in-out",
         mirror: true
     });
@@ -90,4 +91,18 @@
         !entry[0].isIntersecting ? header.classList.add('scrolled') : header.classList.remove('scrolled');
     });
 
-    headerObserver.observe(mark)
+    headerObserver.observe(mark);
+
+    //Small menu
+
+    const menu = document.querySelector('.small-menu');
+
+    document.querySelector('.hamb').addEventListener('click', (e) => {
+        if (e.target.classList.contains('closed')) {
+            menu.classList.remove('show');
+            e.target.classList.remove('closed');
+        } else {
+            menu.classList.add('show');
+            e.target.classList.add('closed');
+        }
+    })
