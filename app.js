@@ -1,3 +1,9 @@
+    //Loader
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelector('.document').style.display = "block";
+        document.querySelector('.container').style.display = "none";
+    });
+
     //AOS LIBRARY
     AOS.init({
         offset: 200,
@@ -105,4 +111,4 @@
             menu.classList.add('show');
             e.target.classList.add('closed');
         }
-    })
+    });
