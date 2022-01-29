@@ -151,7 +151,6 @@ a {
 
 h1 {
     font-family: 'Mochiy Pop P One', serif;
-    padding-top: .5em;
 }
 
 .small-menu {
@@ -172,6 +171,10 @@ h1 {
 .small-menu ul {
     list-style: none;
     line-height: 2;
+}
+
+.small-menu a {
+    display: block;
 }
 
 .small-menu.show {
@@ -532,7 +535,7 @@ main h2 {
 
 #contacts {
     background-color: var(--secondaryColor);
-    padding-bottom: 2em;
+    padding: 10vh 3em;
 }
 
 .contacts-details {
@@ -661,6 +664,9 @@ footer {
     .contacts-details {
         grid-template-columns: 1fr;
     }
+    #contacts {
+        padding-left: 1em;
+    }
     .contacts-details {
         place-items: center;
     }
@@ -683,7 +689,7 @@ footer {
     header h1 {
         position: absolute;
         left: 1em;
-        top: 0em;
+        top: .5em;
     }
     .small-menu {
         display: block;
@@ -700,5 +706,8 @@ footer {
     }
     .arrow {
         display: none;
+    }
+    #contacts {
+        padding-left: .5em;
     }
 }

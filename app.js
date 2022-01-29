@@ -112,3 +112,11 @@
             e.target.classList.add('closed');
         }
     });
+
+    //Call to action
+
+    document.querySelector('.action').addEventListener('click', () => {
+        const contactDistance = document.getElementById('contacts').offsetTop;
+        window.scrollTo(0, contactDistance);
+        document.querySelector('input').focus();
+    });
