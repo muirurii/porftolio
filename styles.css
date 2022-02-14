@@ -83,21 +83,21 @@ header {
 
 header.scrolled {
     position: fixed;
-    background-color: #fff;
-    transform: rotateX(90deg);
+    background-color: rgba(255, 255, 255, 0.918);
+    clip-path: inset(100% 0 0 0);
     animation: header 300ms forwards ease-in-out;
     transform-origin: bottom;
 }
 
 @keyframes header {
     to {
-        transform: rotateX(0deg);
+        clip-path: inset(0 0 0 0);
     }
 }
 
 header .tittle {
     position: relative;
-    min-height: 10vh;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -124,6 +124,7 @@ header nav li {
 .contact {
     background-color: var(--mainOrange);
     padding: .8em 1em;
+    border-radius: 4px;
 }
 
 .mark {
@@ -156,7 +157,7 @@ h1 {
 .small-menu {
     background-color: var(--secondaryColor);
     position: fixed;
-    top: 10vh;
+    top: 80px;
     left: 0;
     width: 100vw;
     height: 100vh;
@@ -251,10 +252,36 @@ main h2,
 }
 
 main h2 {
-    font-family: 'Mochiy Pop P One', serif;
+    position: relative;
     padding: 1em 0;
-    font-weight: bold;
-    font-size: 1.5rem;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+
+main h2::after,
+main h2::before {
+    content: '';
+    position: absolute;
+}
+
+main h2::after {
+    height: 2px;
+    left: -15%;
+    right: -15%;
+    bottom: 1em;
+    background: var(--gradient);
+    transform: rotateZ(180deg);
+}
+
+main h2::before {
+    background-color: #ff6600;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    width: 10px;
+    height: 10px;
+    right: -16%;
+    bottom: calc(1em - 4px);
+    z-index: 2;
+    border-radius: 50%;
 }
 
 #hero {
@@ -316,7 +343,6 @@ main h2 {
 #about p {
     max-width: 500px;
     padding: 0 2em;
-    text-align: center;
 }
 
 .skillset,
@@ -417,6 +443,10 @@ main h2 {
 
 .tools article::before {
     transform: scaleX(0);
+}
+
+.tools article:hover {
+    background-color: #000616;
 }
 
 .tools article:hover::after {
@@ -533,6 +563,33 @@ main h2 {
     }
 }
 
+.more-projects {
+    display: block;
+    margin: 2em auto;
+    padding: 1.3em 2.4em;
+    color: #fff;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.more-projects::after {
+    position: absolute;
+    content: '';
+    left: -50px;
+    right: -50px;
+    top: -50px;
+    bottom: -50px;
+    background: var(--gradient);
+    border-radius: inherit;
+    transition: 600ms linear;
+    z-index: -1;
+}
+
+.more-projects:hover::after {
+    transform: rotateZ(180deg);
+}
+
 #contacts {
     background-color: var(--secondaryColor);
     padding: 10vh 3em;
@@ -575,6 +632,11 @@ form input {
     height: 35px;
 }
 
+form textarea {
+    resize: horizontal;
+    padding-top: 1em;
+}
+
 form input,
 form textarea {
     width: 60%;
@@ -582,9 +644,17 @@ form textarea {
     padding-left: 1em;
     margin-top: .5em;
     caret-color: var(--mainOrange);
-    border: 1px solid transparent;
+    border: 1px solid #ff6600;
     outline: transparent;
     font-family: inherit;
+}
+
+form input:focus,
+.group.error input:focus,
+form textarea:focus,
+.group.error textarea:focus {
+    box-shadow: 1px 1px 6px .5px #ff6600;
+    border-color: transparent;
 }
 
 .group.error input,
