@@ -115,6 +115,33 @@ header nav ul {
 header nav li {
     padding-right: 1em;
     color: #fff;
+    position: relative;
+}
+
+header nav li::after {
+    content: '';
+    position: absolute;
+    left: -4px;
+    height: 100%;
+    width: 2px;
+    background: var(--gradient);
+    z-index: -1;
+    transform: scaleY(0);
+    transition: transform 400ms linear;
+    transform-origin: bottom;
+}
+
+header nav li:last-child:after {
+    height: 0;
+}
+
+header nav li:hover {
+    color: var(--mainOrange);
+}
+
+header nav li:hover::after {
+    transform-origin: top;
+    transform: scaleY(1);
 }
 
 .scrolled li {
@@ -125,6 +152,10 @@ header nav li {
     background-color: var(--mainOrange);
     padding: .8em 1em;
     border-radius: 4px;
+}
+
+.contact:hover {
+    color: initial;
 }
 
 .mark {
@@ -471,18 +502,21 @@ main h2::before {
 
 .tools article::before {
     transform: scaleX(0);
+    transform-origin: right;
 }
 
-.tools article:hover {
-    background-color: #000616;
+.tools article::after {
+    transform-origin: top;
 }
 
 .tools article:hover::after {
     transform: scaleY(0);
+    transform-origin: bottom;
 }
 
 .tools article:hover::before {
     transform: scaleY(1);
+    transform-origin: left;
 }
 
 .tools ul {

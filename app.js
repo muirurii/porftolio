@@ -4,6 +4,48 @@
         document.querySelector('.container').style.display = "none";
     });
 
+    //Call to action
+
+    document.querySelector('.action').addEventListener('click', () => {
+        const contactDistance = document.getElementById('contacts').offsetTop;
+        window.scrollTo(0, contactDistance);
+        document.querySelectorAll('input')[0].focus();
+    });
+    //Header
+
+    const header = document.querySelector('header');
+    const mark = document.querySelector('.mark');
+    const headerObserver = new IntersectionObserver(entry => {
+        !entry[0].isIntersecting ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+    });
+
+    headerObserver.observe(mark);
+
+    //Small menu
+
+    const menu = document.querySelector('.small-menu');
+    const hamburger = document.querySelector('.hamb');
+
+    const closeMenu = () => {
+        menu.classList.remove('show');
+        hamburger.classList.remove('closed');
+    }
+
+    hamburger.addEventListener('click', (e) => {
+        if (e.target.classList.contains('closed')) {
+            closeMenu();
+        } else {
+            menu.classList.add('show');
+            e.target.classList.add('closed');
+        }
+    });
+
+    //close menu on link click 
+
+    menu.querySelectorAll('a').forEach(li => {
+        li.addEventListener('click', closeMenu);
+    })
+
     //AOS LIBRARY
     AOS.init({
         offset: 200,
@@ -14,7 +56,6 @@
     });
 
     //Send Mail
-
 
     const from_name = document.getElementById('name');
     const reply_to = document.getElementById('email');
@@ -86,37 +127,4 @@
                     sendButton.textContent = "Send";
                 }, 3000);
             });
-    });
-
-    //Header
-
-    const header = document.querySelector('header');
-    const mark = document.querySelector('.mark');
-    const headerObserver = new IntersectionObserver(entry => {
-        console.log(entry[0].isIntersecting);
-        !entry[0].isIntersecting ? header.classList.add('scrolled') : header.classList.remove('scrolled');
-    });
-
-    headerObserver.observe(mark);
-
-    //Small menu
-
-    const menu = document.querySelector('.small-menu');
-
-    document.querySelector('.hamb').addEventListener('click', (e) => {
-        if (e.target.classList.contains('closed')) {
-            menu.classList.remove('show');
-            e.target.classList.remove('closed');
-        } else {
-            menu.classList.add('show');
-            e.target.classList.add('closed');
-        }
-    });
-
-    //Call to action
-
-    document.querySelector('.action').addEventListener('click', () => {
-        const contactDistance = document.getElementById('contacts').offsetTop;
-        window.scrollTo(0, contactDistance);
-        document.querySelector('input').focus();
     });
