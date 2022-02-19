@@ -62,7 +62,7 @@
     const message = document.getElementById('message');
 
     const validateTexts = (element) => {
-        if (!element.value.trim().length) {
+        if (element.value.trim().length < 3) {
             element.parentElement.classList.add('error');
             return false;
         } else {
