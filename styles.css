@@ -6,6 +6,19 @@
     padding: 0;
 }
 
+:root {
+    --primaryColor: #000616;
+    --secondaryColor: #000711;
+    --mainOrange: #ff6600;
+    --pink: #c7035e;
+    --gradient: linear-gradient(to right, var(--mainOrange), #c7035e);
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-snap-type: mandatory 30px;
+}
+
 .document {
     display: none;
     z-index: 100;
@@ -56,18 +69,6 @@
     }
 }
 
-:root {
-    --primaryColor: #000616;
-    --secondaryColor: #000711;
-    --mainOrange: #ff6600;
-    --gradient: linear-gradient(to right, var(--mainOrange), #c7035e);
-}
-
-html {
-    scroll-behavior: smooth;
-    scroll-snap-type: mandatory 30px;
-}
-
 body {
     background-color: var(--primaryColor);
     font-family: 'Nunito', serif;
@@ -88,68 +89,33 @@ header {
     justify-content: left;
 }
 
-.tittle {
+.title {
     padding-left: 1em;
 }
 
-header.scrolled {
-    position: fixed;
-    background-color: rgba(255, 255, 255, 0.918);
-    clip-path: inset(100% 0 0 0);
-    animation: header 300ms forwards ease-in-out;
-    transform-origin: bottom;
-}
-
-@keyframes header {
-    to {
-        clip-path: inset(0 0 0 0);
-    }
-}
-
-header nav {
+.main-nav {
     padding-right: 3em;
     display: none;
 }
 
-header nav ul {
+.main-nav ul {
     display: flex;
     list-style: none;
 }
 
-header nav li {
+.main-nav li {
     padding-right: 1em;
     color: #fff;
     position: relative;
 }
 
-header nav li::after {
-    content: '';
-    position: absolute;
-    left: -4px;
-    height: 100%;
-    width: 2px;
-    background: var(--gradient);
-    z-index: -1;
-    transform: scaleY(0);
-    transition: transform 400ms linear;
-    transform-origin: bottom;
+header.scrolled {
+    position: fixed;
+    background-color: #02080f8f;
 }
 
-header nav li:last-child:after {
-    height: 0;
-}
-
-header nav li:hover {
-    color: var(--mainOrange);
-}
-
-header nav li:hover::after {
-    transform-origin: top;
-    transform: scaleY(1);
-}
-
-.scrolled li {
-    color: var(--primaryColor);
+.main-nav li:not(:last-child):hover>a {
+    opacity: .8;
 }
 
 .contact {
@@ -159,11 +125,12 @@ header nav li:hover::after {
 }
 
 .contact:hover {
-    color: initial;
+    background-color: #fff;
+    color: var(--mainOrange);
 }
 
 .mark {
-    position: relative;
+    position: absolute;
     top: 80px;
 }
 
@@ -328,6 +295,56 @@ main h2::before {
     padding: 1em;
 }
 
+.bubble {
+    height: 70px;
+    width: 40px;
+    border: 3px solid #fff;
+    border-radius: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(100% - 100px);
+    transition: height 200ms;
+}
+
+.bubble::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    transition: transform 200ms ease-in-out;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    animation: bub 3s 400ms infinite linear;
+}
+
+@keyframes bub {
+    to {
+        transform: translate(-50%, 25px);
+        opacity: 0.2;
+    }
+}
+
+.bubble.action::after {
+    transform: translate(-50%, 65px);
+    animation: none;
+}
+
+.bubble.action {
+    height: 100px;
+    transform-origin: bottom;
+    animation: disapear 500ms 300ms forwards;
+}
+
+@keyframes disapear {
+    to {
+        transform: translateX(-50%) scaleY(0);
+    }
+}
+
 .hero-bg {
     position: absolute;
     left: 0;
@@ -387,20 +404,6 @@ main h2::before {
 
 .gradient-button:hover::after {
     transform: rotateZ(540deg);
-}
-
-.arrow {
-    position: absolute;
-    bottom: 20px;
-    right: 50%;
-    transform: scale(2) translateX(-50%);
-    animation: slide 1s infinite linear alternate;
-}
-
-@keyframes slide {
-    to {
-        transform: scale(2) translate(-50%, 6px);
-    }
 }
 
 #about p {
@@ -593,7 +596,7 @@ main h2::before {
 
 .my-projects article:hover::before,
 .my-projects article:hover::after {
-    transform: scaleX(0);
+    transform: scale(0);
 }
 
 .my-projects a {
@@ -697,8 +700,7 @@ form textarea {
     caret-color: var(--mainOrange);
     background-color: var(--secondaryColor);
     border: none;
-    --shadow: #c7035e;
-    box-shadow: .5px .5px 2px .5px var(--shadow);
+    box-shadow: .5px .5px 2px .5px var(--pink);
     outline: transparent;
     font-family: inherit;
     transition: 1s;
@@ -706,13 +708,13 @@ form textarea {
 
 .group.error input,
 .group.error textarea {
-    --shadow: #ff0000;
+    --pink: #ff0000;
     animation: vibrate 200ms ease-in-out forwards 3;
 }
 
 form input:focus,
 form textarea:focus {
-    box-shadow: inset .5px .5px 1px .5px var(--shadow), .5px .5px 1px .5px var(--shadow);
+    box-shadow: inset .5px .5px 1px .5px var(--pink), .5px .5px 1px .5px var(--pink);
 }
 
 @keyframes vibrate {
@@ -785,7 +787,7 @@ footer {
     header {
         justify-content: space-around;
     }
-    header nav {
+    .main-nav {
         display: block;
     }
     .tittle {
@@ -830,9 +832,6 @@ footer {
     form,
     .social-icons {
         width: 300px;
-    }
-    .arrow {
-        display: none;
     }
     #contacts {
         padding-left: 1.4em;

@@ -15,8 +15,11 @@
 
     const header = document.querySelector('header');
     const mark = document.querySelector('.mark');
+    const bubble = document.querySelector('.bubble');
+
     const headerObserver = new IntersectionObserver(entry => {
-        !entry[0].isIntersecting ? header.classList.add('scrolled') : header.classList.remove('scrolled');
+        header.className = !entry[0].isIntersecting ? 'scrolled' : '';
+        bubble.className = !entry[0].isIntersecting ? 'action bubble' : 'bubble';
     });
 
     headerObserver.observe(mark);
@@ -72,15 +75,20 @@
     }
 
     const validateEmail = (element) => {
-        const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-        if (!regex.test(element.value)) {
-            element.parentElement.classList.add('error');
-            return false;
-        } else {
-            element.parentElement.classList.remove('error');
-            return true;
+            const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!regex.test(element.value)) {
+                element.parentElement.classList.add('error');
+                return false;
+            } else {
+                element.parentElement.classList.remove('error');
+                return true;
+            }
         }
-    }
+        // const setSendButton = (className, text, disabled) => {
+        //     sendButton.className = className;
+        //     sendButton.textContent = text;
+        //     sendButton.disabled = disabled ? 'true' : '' ;
+        // }
 
     (function() {
         emailjs.init("user_GiEJaeXXJLtqsyGtlxZyd");
