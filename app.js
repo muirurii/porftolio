@@ -59,10 +59,12 @@
     });
 
     //Send Mail
-
+    const form = document.querySelector('form');
     const from_name = document.getElementById('name');
     const reply_to = document.getElementById('email');
     const message = document.getElementById('message');
+    const sendButton = document.querySelector('.submit');
+    const notificationEl = document.querySelector('.notification');
 
     const validateTexts = (element) => {
         if (element.value.trim().length < 3) {
@@ -75,26 +77,41 @@
     }
 
     const validateEmail = (element) => {
-            const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            if (!regex.test(element.value)) {
-                element.parentElement.classList.add('error');
-                return false;
-            } else {
-                element.parentElement.classList.remove('error');
-                return true;
-            }
+        const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        if (!regex.test(element.value)) {
+            element.parentElement.classList.add('error');
+            return false;
+        } else {
+            element.parentElement.classList.remove('error');
+            return true;
         }
-        // const setSendButton = (className, text, disabled) => {
-        //     sendButton.className = className;
-        //     sendButton.textContent = text;
-        //     sendButton.disabled = disabled ? 'true' : '' ;
-        // }
+    }
+
+    const notify = (message, type) => {
+
+        const recent = document.querySelector('.notification');
+        recent && form.removeChild(recent);
+        const notificationEl = document.createElement('p');
+        notificationEl.className = `notification notify ${type}`;
+        notificationEl.textContent = message;
+
+        const firstLabel = form.querySelector('.first-label');
+        form.insertBefore(notificationEl, firstLabel);
+
+
+        if (type === 'sending') return sendButton.setAttribute('disabled', true);
+        sendButton.removeAttribute('disabled');
+
+        setTimeout(() => {
+            form.removeChild(notificationEl);
+        }, 4000);
+    }
 
     (function() {
         emailjs.init("user_GiEJaeXXJLtqsyGtlxZyd");
     })();
 
-    document.querySelector('form').addEventListener('submit', (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const checkEmail = validateEmail(reply_to);
@@ -110,29 +127,19 @@
             to_name: "Peter"
         };
 
-        const sendButton = e.target.querySelector('button');
-        sendButton.className = "sending";
-        sendButton.textContent = "Sending";
-        const checkIcon = sendButton.getAttribute('data-check')
+        const clearFields = () => {
+            reply_to.value = '';
+            message.value = '';
+            from_name.value = '';
+        }
 
-        reply_to.value = '';
-        message.value = '';
-        from_name.value = '';
+        notify('Sending', 'sending');
 
         emailjs.send("service_5r0rlgk", "template_c7rtf6r", templateParams)
             .then(() => {
-                sendButton.className = "sent";
-                sendButton.textContent = `Sent ${checkIcon}`;
-                setTimeout(() => {
-                    sendButton.className = "";
-                    sendButton.textContent = "Send";
-                }, 3000);
+                notify('Message Sent', 'sent');
+                clearFields();
             }, () => {
-                sendButton.className = "not-sent";
-                sendButton.textContent = "Unable to send message";
-                setTimeout(() => {
-                    sendButton.className = "";
-                    sendButton.textContent = "Send";
-                }, 3000);
+                notify('Message not sent! Try again.', 'not-sent');
             });
     });
