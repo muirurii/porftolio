@@ -7,16 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Poppins:wght@200;300&family=Updock&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500&family=Philosopher&family=Sacramento&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/9f145c69b6.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
-    <script src="app.js" defer></script>
     <title>Peter Ngugi - Web developer</title>
 </head>
 
 <body>
-    <div class="container">
+    <div class="container center">
         <div class="loaders">
             <div class="one"></div>
             <div class="two"></div>
@@ -25,7 +24,7 @@
     </div>
     <section class="document">
         <header>
-            <div class="title">
+            <div class="logo">
                 <a href="#">
                     <h1>devp &nbsp;</h1>
                 </a>
@@ -33,7 +32,7 @@
             <nav class="main-nav">
                 <ul>
                     <li><a href="#">Home</a></li>
-                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#about">About me</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contacts" class="contact">Contacts</a></li>
@@ -46,32 +45,38 @@
         <div class="small-menu">
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#about">About Me</a></li>
+                <li><a href="#about">About me</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contacts">Contacts</a></li>
             </ul>
         </div>
         <main>
+            <div class="side-nav">
+                <a href="#hero" class="active"></a>
+                <a href="#about"></a>
+                <a href="#skills"></a>
+                <a href="#projects"></a>
+                <a href="#contacts"></a>
+            </div>
             <section id="hero" class="center">
                 <div class="bubble"></div>
-                <img srcset="https://images.pexels.com/photos/574069/pexels-photo-574069.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500 480w,
-                https://images.pexels.com/photos/574069/pexels-photo-574069.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1024 800w" sizes="(max-width: 600px) 480px,
-                                800px" src="https://images.pexels.com/photos/574069/pexels-photo-574069.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=1024" alt="Photo of a  developer coding">
                 <section>
-                    <h3 class="mark"> <span class="highlight">Hi,</span> I am Peter Ngugi.</h3>
+                    <h3 class="mark">Hi, I am Peter Ngugi.</h3>
                     <h3 class="highlight">
-                        A frontend website developer.
+                        A frontend web developer.
                     </h3>
+                    <h3></h3>
                     <p>
-                        I design and develop scalable and appealing websites <br/> that are responsive across all devices.
+                        I design and develop appealing personal or enterprise websites
+                        <br/> which are scalable and responsive across different devices.
                     </p>
-                    <button class="action gradient-button">Hire Me</button>
+                    <button class="action gradient-button">Connect with me</button>
                 </section>
             </section>
             <section id="about" data-aos="fade-down">
                 <div class="center">
-                    <h2>About me</h2>
+                    <h2 class="heading">About me</h2>
                 </div>
                 <section class="about">
                     <p>
@@ -84,96 +89,132 @@
             </section>
             <section id="skills" data-aos="fade-down">
                 <div class="center">
-                    <h2>Skills</h2>
+                    <h2 class="heading">Skillset</h2>
                 </div>
-                <h3>Services</h3>
-                <section class="skillset">
-                    <article>
-                        <div>
-                            <i class="fas fa-desktop"></i>
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h4>Responsive Design</h4>
-                    </article>
-                    <article>
-                        <i class="fas fa-tools"></i>
-                        <h4>Web Development</h4>
-                    </article>
-                    <article>
-                        <i class="fas fa-cogs"></i>
-                        <h4>API</h4>
-                    </article>
-                </section>
-                <section>
-                    <h3>Tools & Technologies</h3>
-                    <section class="tech-stack">
-                        <article class="center">
-                            <i class="fab fa-html5"></i>
-                        </article>
-                        <article class="center">
-                            <i class="fab fa-css3-alt"></i>
-                        </article>
-                        <article class="center">
-                            <i class="fab fa-js"></i>
-                        </article>
-                        <article class="center">
-                            <i class="fab fa-react"></i>
-                        </article>
-                        <article class="center">
-                            <i class="fab fa-git-alt"></i>
-                        </article>
+                <section class="skills">
+                    <section class="skillset">
+                        <h3 class="sub-heading">Expertise</h3>
+                        <ul class="skills-card">
+                            <li>Responsive web design</li>
+                            <li>Web development</li>
+                            <li>Landing pages</li>
+                            <li>Single page applications</li>
+                            <li>Working with API's</li>
+                            <li>Git & GitHub</li>
+                        </ul>
+                    </section>
+                    <section class="tools">
+                        <h3 class="sub-heading">Tools & Technologies</h3>
+                        <ul class="tech-stack">
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript (ES6+)</li>
+                            <li>ReactJs & its eco-sysytem</li>
+                            <li>NodeJs & ExpressJs</li>
+                            <li>Git</li>
+                        </ul>
                     </section>
                 </section>
             </section>
             <section id="projects" data-aos="fade-down">
                 <div class="center">
-                    <h2>Projects</h2>
+                    <h2 class="heading">Projects</h2>
                 </div>
                 <section>
                     <section class="my-projects">
-                        <article>
-                            <h3>Law firm website</h3>
-                            <img src="https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Project photo">
-                            <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/Law/" class="live">Live Site &UpperRightArrow;</a>
-                            <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/Law" class="code">Code</a>
-                        </article>
-                        <article>
-                            <h3>English dictionary</h3>
-                            <img src="https://images.pexels.com/photos/8296035/pexels-photo-8296035.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Project photo">
-                            <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/dictionary/" class="live">Live Site &UpperRightArrow;</a>
-                            <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/dictionary/" class="code">Code</a>
-                        </article>
-                        <article>
-                            <h3>Alpha Tours</h3>
-                            <img src="https://images.pexels.com/photos/7307584/pexels-photo-7307584.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Project photo">
-                            <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/alphatours/" class="live">Live Site &UpperRightArrow;</a>
-                            <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/alphatours" class="code">Code</a>
-                        </article>
-                        <article>
-                            <h3>Grocery store website</h3>
-                            <img src="https://images.pexels.com/photos/375897/pexels-photo-375897.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="Project photo">
-                            <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/grocery/" class="live">Live Site &UpperRightArrow;</a>
-                            <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/grocery" class="code">Code</a>
-                        </article>
+                        <section class="project">
+                            <section>
+                                <article class="project-photo">
+                                    <img src="./assets/projects/greens.png" alt="Project photo">
+                                </article>
+                                <article>
+                                    <h3 class="sub-heading">Greens</h3>
+                                    <p>
+                                        A frontend web implimentation for a grocery e-comerce site that enables users to view different categories of products,filter products, select, remove, and add or reduce their their quantity.
+                                        <br/>
+                                        <br/> Technologies used :- React, Context API, CSS
+                                    </p>
+                                    <div class="links">
+                                        <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/grocery/" class="live">
+                                            Live Site 
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </a>
+                                        <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/grocery" class="code">
+                                        Code
+                                        <i class="fas fa-folder"></i>
+                                        </a>
+                                    </div>
+                                </article>
+                            </section>
+                        </section>
+                        <section class="project">
+                            <section>
+                                <article class="project-photo">
+                                    <img src="./assets/projects/barber.png" alt="Project photo">
+                                </article>
+                                <article>
+                                    <h3 class="sub-heading">Royal Executive</h3>
+                                    <p>
+                                        A barber shop landing page website that describes the services of the shop and enables users to book and send their feedback.
+                                        <br/>
+                                        <br/>Technologies used :- HTML, CSS, JavaScript
+                                    </p>
+                                    <div class="links">
+                                        <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/barbershop/" class="live">
+                                        Live Site 
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                        <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/barbershop" class="code">
+                                        Code
+                                        <i class="fas fa-folder"></i>
+                                    </a>
+                                    </div>
+                                </article>
+                            </section>
+                        </section>
+                        <section class="project">
+                            <section>
+                                <article class="project-photo">
+                                    <img src="./assets/projects/dictionary.png" alt="Project photo">
+                                </article>
+                                <article>
+                                    <h3 class="sub-heading">English dictionary</h3>
+                                    <p>
+                                        A online word search application that enables users to query words and get the word's definition, part of speech, examples in sentences and a phonetic of its pronounciation.
+                                        <br/>
+                                        <br/>Technologies used :- HTML, CSS, JavaScript, Dictionary API.
+                                    </p>
+                                    <div class="links">
+                                        <a target="_blank" referrerpolicy="no-referrer" href="https://muirurii.github.io/dictionary/" class="live">
+                                        Live Site 
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                        <a target="_blank" referrerpolicy="no-referrer" href="https://github.com/muirurii/dictionary/" class="code">
+                                    Code
+                                    <i class="fas fa-folder"></i>
+                                </a>
+                                    </div>
+                                </article>
+                            </section>
+                        </section>
                     </section>
-                    <section class="center">
-                        <a class="more-projects gradient-button" href="https://github.com/muirurii">View More &UpperRightArrow;</a>
-                    </section>
+                    <a class="more-projects gradient-button" href="https://github.com/muirurii">View More <i class="fab fa-github"></i></a>
                 </section>
             </section>
             <section id="contacts" data-aos="fade-down">
                 <div class="center">
-                    <h2>Contact Me</h2>
+                    <h2 class="heading">Contact Me</h2>
                 </div>
                 <section class="contacts-details">
                     <section>
-                        <h3 class="contact-heading">Contacts</h3>
+                        <h3 class="sub-heading">Contacts</h3>
                         <section class="social-icons">
                             <section>
                                 <div>
                                     <a href="https://github.com/muirurii" target="_blank" referrerpolicy="no-referrer"><i class="fab fa-github"></i></a>
-                                    <a href="#"><i class="fab fa-instagram"></i></a>
                                     <a href="https://twitter.com/dronethem" target="_blank" referrerpolicy="no-referrer"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-whatsapp"></i></a>
                                 </div>
                                 <div>
                                     <a href="mailto:pnkanuna@gmail.com"><i class="fas fa-envelope"></i><span>pnkanuna@gmail.com</span></a>
@@ -188,9 +229,9 @@
                         </section>
                     </section>
                     <form>
-                        <h3 class="contact-heading">Send me a message</h3>
+                        <h3 class="sub-heading">Send me a message</h3>
                         <div class="group first-label">
-                            <label for="name" data-name="Name should be three or more characters">Name</label>
+                            <label for="name" data-name="Name should contain three or more characters">Name</label>
                             <input type="text" id="name" placeholder="Enter your name">
                         </div>
                         <div class="group">
@@ -198,8 +239,8 @@
                             <input type="text" id="email" placeholder="Enter your email">
                         </div>
                         <div class="group">
-                            <label for="message" data-name="Message should be three or more characters">Message</label>
-                            <textarea id="message" cols="30" rows="10" placeholder="Enter message"></textarea>
+                            <label for="message" data-name="Message should contain three or more characters">Message</label>
+                            <textarea id="message" cols="30" rows="10" placeholder="Enter a message"></textarea>
                         </div>
                         <button type="submit" data-check="&check;" class="submit">Send</button>
                     </form>
@@ -212,6 +253,7 @@
     </section>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="app.js" defer></script>
 </body>
 
 </html>
