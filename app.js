@@ -1,170 +1,216 @@
-  //Call to action
+let lastScroll = 0;
+let timeout;
 
-  document.querySelector('.action').addEventListener('click', () => {
-      const contactDistance = document.getElementById('contacts').offsetTop;
-      window.scrollTo(0, contactDistance);
-      document.querySelectorAll('input')[0].focus();
-  });
+window.addEventListener("scroll", (e) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        const scrollDiff = window.scrollY - lastScroll;
+        const direction =
+            Math.sign(scrollDiff) === -1 && scrollDiff > 40 ? "up" : "down";
+        console.log(direction);
+        lastScroll = window.scrollY;
+    }, 500);
+});
 
-  //Header
+//Call to action
 
-  const header = document.querySelector('header');
-  const mark = document.querySelector('.mark');
-  const bubble = document.querySelector('.bubble');
+document.querySelector(".action").addEventListener("click", () => {
+    const contactDistance = document.getElementById("contacts").offsetTop;
+    window.scrollTo(0, contactDistance);
+    document.querySelectorAll("input")[0].focus();
+});
 
-  const headerObserver = new IntersectionObserver(entry => {
-      header.className = !entry[0].isIntersecting ? 'scrolled' : '';
-      bubble.className = !entry[0].isIntersecting ? 'action bubble' : 'bubble';
-  });
+//Header
 
-  headerObserver.observe(mark);
+const header = document.querySelector("header");
+const mark = document.querySelector(".mark");
+const bubble = document.querySelector(".bubble");
 
-  //Small menu
+const headerObserver = new IntersectionObserver((entry) => {
+    header.className = !entry[0].isIntersecting ? "scrolled" : "";
+    bubble.className = !entry[0].isIntersecting ? "action bubble" : "bubble";
+});
 
-  const menu = document.querySelector('.small-menu');
-  const hamburger = document.querySelector('.hamb');
+headerObserver.observe(mark);
 
-  const closeMenu = () => {
-      menu.classList.remove('show');
-      hamburger.classList.remove('closed');
-  }
+//Bubble scroll
 
-  hamburger.addEventListener('click', (e) => {
-      if (e.target.classList.contains('closed')) {
-          closeMenu();
-      } else {
-          menu.classList.add('show');
-          e.target.classList.add('closed');
-      }
-  });
+const about = document.getElementById("about");
 
-  //close menu on link click 
+bubble.addEventListener("click", () => {
+    const toAbout = about.offsetTop;
+    window.scrollTo(0, toAbout);
+});
 
-  menu.querySelectorAll('a').forEach(li => {
-      li.addEventListener('click', closeMenu);
-  });
+//Small menu
 
-  //Side Menu
+const menu = document.querySelector(".small-menu");
+const hamburger = document.querySelector(".hamb");
 
-  const sections = document.querySelectorAll('main>section');
-  const sideNav = document.querySelector('.side-nav');
+const closeMenu = () => {
+    menu.classList.remove("show");
+    hamburger.classList.remove("closed");
+};
 
-  const sectionsObserver = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-          if (entry.isIntersecting) {
-              if (entry.intersectionRect < 400) return;
-              const active = document.querySelector('.active');
-              const id = entry.target.id;
-              const activeNow = sideNav.querySelector(`a[href*="${id}"]`);
-              active !== null && active.classList.remove('active');
-              activeNow.classList.add('active');
-          }
+hamburger.addEventListener("click", (e) => {
+    if (e.target.classList.contains("closed")) {
+        closeMenu();
+    } else {
+        menu.classList.add("show");
+        e.target.classList.add("closed");
+    }
+});
 
-      });
-  }, {
-      threshold: 0.43
-  });
+//close menu on link click
 
-  sections.forEach(card => sectionsObserver.observe(card));
+menu.querySelectorAll("a").forEach((li) => {
+    li.addEventListener("click", closeMenu);
+});
 
-  //AOS LIBRARY
+//Side Menu
 
-  AOS.init({
-      offset: 00,
-      duration: 700,
-      delay: 50,
-      easing: "ease-in-out",
-      mirror: true
-  });
+const sections = document.querySelectorAll("main>section");
+const sideNav = document.querySelector(".side-nav");
 
-  //Send Mail
-  const form = document.querySelector('form');
-  const from_name = document.getElementById('name');
-  const reply_to = document.getElementById('email');
-  const message = document.getElementById('message');
-  const sendButton = document.querySelector('.submit');
-  const notificationEl = document.querySelector('.notification');
+const sectionsObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                if (entry.intersectionRect < 400) return;
+                const active = document.querySelector(".active");
+                const id = entry.target.id;
+                const activeNow = sideNav.querySelector(`a[href*="${id}"]`);
+                active !== null && active.classList.remove("active");
+                activeNow.classList.add("active");
+            }
+        });
+    }, {
+        threshold: 0.43,
+    }
+);
 
-  const validateTexts = (element) => {
-      if (element.value.trim().length < 3) {
-          element.parentElement.classList.add('error');
-          return false;
-      } else {
-          element.parentElement.classList.remove('error');
-          return true;
-      }
-  }
+sections.forEach((card) => sectionsObserver.observe(card));
 
-  const validateEmail = (element) => {
-      const regex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-      if (!regex.test(element.value)) {
-          element.parentElement.classList.add('error');
-          return false;
-      } else {
-          element.parentElement.classList.remove('error');
-          return true;
-      }
-  }
+//Email form
+const form = document.querySelector("form");
+const from_name = document.getElementById("name");
+const reply_to = document.getElementById("email");
+const message = document.getElementById("message");
+const sendButton = document.querySelector(".submit");
+const notificationContainer = document.querySelector(".notification-container");
 
-  const notify = (message, type) => {
+//Notifications
 
-      const recent = document.querySelector('.notification');
-      recent && form.removeChild(recent);
-      const notificationEl = document.createElement('p');
-      notificationEl.className = `notification notify ${type}`;
-      notificationEl.textContent = message;
+const toogleNotification = (element) => {
+    element.classList.add("animate-hide");
 
-      const firstLabel = form.querySelector('.first-label');
-      form.insertBefore(notificationEl, firstLabel);
+    const isElementActive = Array.from(notificationContainer.childNodes).some(
+        (node) => node === element
+    );
+    if (!isElementActive) return;
+    setTimeout(() => {
+        notificationContainer.removeChild(element);
+    }, 350);
+};
 
+const closeNotification = (e) => {
+    if (!e.target.classList.contains("close-not")) return;
+    toogleNotification(e.target.parentElement);
+};
 
-      if (type === 'sending') return sendButton.setAttribute('disabled', true);
-      sendButton.removeAttribute('disabled');
+notificationContainer.addEventListener("click", closeNotification);
 
-      setTimeout(() => {
-          form.removeChild(notificationEl);
-      }, 4000);
-  }
+const addNotification = (text, type) => {
+    const last = Array.from(
+        notificationContainer.querySelectorAll(".notification")
+    )[0];
 
-  (function() {
-      emailjs.init("user_GiEJaeXXJLtqsyGtlxZyd");
-  })();
+    const notification = document.createElement("div");
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `<p>${text}</p><button class="close-not">x</button>`;
 
-  form.addEventListener('submit', (e) => {
-      e.preventDefault();
+    if (!last || last.classList.contains("animate-hide")) {
+        notificationContainer.appendChild(notification);
+    } else {
+        notificationContainer.insertBefore(notification, last);
+    }
+    setTimeout(() => toogleNotification(notification), 9000);
+};
 
-      const checkEmail = validateEmail(reply_to);
-      const checkMessage = validateTexts(message);
-      const validateName = validateTexts(from_name);
+//Send Mail
 
-      if (!checkEmail || !checkMessage || !validateName) return;
+const setSending = (value) => {
+    value
+        ?
+        sendButton.classList.add("sending") :
+        sendButton.classList.remove("sending");
+};
 
-      const templateParams = {
-          from_name: from_name.value,
-          message: message.value,
-          reply_to: reply_to.value,
-          to_name: "Peter"
-      };
+const validateTexts = (element) => {
+    if (element.value.trim().length < 3) {
+        element.parentElement.classList.add("error");
+        return false;
+    } else {
+        element.parentElement.classList.remove("error");
+        return true;
+    }
+};
 
-      const clearFields = () => {
-          reply_to.value = '';
-          message.value = '';
-          from_name.value = '';
-      }
+const validateEmail = (element) => {
+    const regex =
+        /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!regex.test(element.value)) {
+        element.parentElement.classList.add("error");
+        return false;
+    } else {
+        element.parentElement.classList.remove("error");
+        return true;
+    }
+};
 
-      notify('Sending', 'sending');
+(function() {
+    emailjs.init("user_GiEJaeXXJLtqsyGtlxZyd");
+})();
 
-      emailjs.send("service_5r0rlgk", "template_c7rtf6r", templateParams)
-          .then(() => {
-              notify('Message Sent', 'sent');
-              clearFields();
-          }, () => {
-              notify('Message not sent! Try again.', 'not-sent');
-          });
-  });
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  //Loader
-  document.addEventListener('DOMContentLoaded', () => {
-      document.querySelector('.document').style.display = "block";
-      document.querySelector('.container').style.display = "none";
-  });
+    const checkEmail = validateEmail(reply_to);
+    const checkMessage = validateTexts(message);
+    const validateName = validateTexts(from_name);
+    if (!checkEmail || !checkMessage || !validateName)
+        return addNotification("Please fix the errors", "error");
+
+    const templateParams = {
+        from_name: from_name.value,
+        message: message.value,
+        reply_to: reply_to.value,
+        to_name: "Peter",
+    };
+
+    const clearFields = () => {
+        reply_to.value = "";
+        message.value = "";
+        from_name.value = "";
+    };
+
+    setSending(true);
+
+    emailjs.send("service_5r0rlgk", "template_c7rtf6r", templateParams).then(
+        () => {
+            addNotification("Your message was sent successfully", "success");
+            clearFields();
+            setSending(false);
+        },
+        () => {
+            addNotification("Message not sent! Try again", "error");
+            setSending(false);
+        }
+    );
+});
+
+//Loader
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".document").style.display = "block";
+    document.querySelector(".container").style.display = "none";
+});

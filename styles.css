@@ -12,7 +12,7 @@
         --mainOrange: #fc2f00;
         --mainYellow: #ffbc0a;
         --error: #ff0000;
-        --success: #008000;
+        --success: #011f01;
         --gradient: linear-gradient(to right, var(--mainOrange), var(--mainYellow));
     }
     
@@ -142,6 +142,62 @@
         display: inline-block;
     }
     
+    .notification-container {
+        position: fixed;
+        top: 80px;
+        right: 1em;
+        z-index: 10;
+    }
+    
+    .notification {
+        position: relative;
+        right: -110%;
+        border-radius: 3px;
+        padding: .8em 1em .8em calc(1em + 5px);
+        width: fit-content;
+        margin-top: 1em;
+        font-size: .8rem;
+        background-color: #fff;
+        animation: noti 300ms ease-in-out forwards;
+    }
+    
+    .notification.success {
+        color: var(--success);
+    }
+    
+    .notification.error {
+        color: var(--error);
+    }
+    
+    @keyframes noti {
+        to {
+            right: 0;
+        }
+    }
+    
+    .notification.animate-hide {
+        animation: none;
+        right: 0;
+        animation: anime-close 300ms ease-in-out forwards;
+    }
+    
+    @keyframes anime-close {
+        to {
+            opacity: 0;
+            right: -110%;
+        }
+    }
+    
+    .close-not {
+        position: absolute;
+        top: 1px;
+        left: 4px;
+        background-color: transparent;
+        color: var(--error);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: .8rem;
+    }
+    
     button {
         border: none;
         cursor: pointer;
@@ -172,16 +228,14 @@
         position: relative;
     }
     
-    .sub-heading::after {
+    .sub-heading::before {
         content: '';
         position: absolute;
-        bottom: 1em;
-        left: -.2em;
-        width: calc(100% + .5em);
-        height: 10px;
+        bottom: 1.5rem;
         z-index: -1;
-        border-bottom: 1px solid #ffffff42;
-        border-bottom-left-radius: 5px;
+        height: 1px;
+        width: 50%;
+        background: var(--gradient);
     }
     
     .main-nav {
@@ -334,7 +388,7 @@
     }
     
     #hero h3.highlight {
-        font-size: 3.4rem;
+        font-size: clamp(3rem, 1rem + 5vw, 3.6rem);
         font-weight: bold;
     }
     
@@ -423,11 +477,19 @@
     }
     
     .my-projects {
-        padding: 0 1em;
+        padding: 0 .5em;
+        display: grid;
+        grid-template-rows: 1fr;
+        place-items: center;
     }
     
     .project {
         margin: 0 auto 4em auto;
+    }
+    
+    .project>section {
+        display: grid;
+        grid-template-columns: 1fr;
     }
     
     .project h3 {
@@ -435,9 +497,9 @@
     }
     
     .project-photo {
-        height: 260px;
-        width: 320px;
-        margin-bottom: 1em;
+        height: 240px;
+        max-width: 400px;
+        margin: 0 .5em 1em 0;
         position: relative;
         border: 5px double var(--textColor);
         border-radius: 5px;
@@ -479,17 +541,17 @@
         background-color: var(--mainOrange);
     }
     
-    .more-projects {
+    a.more-projects {
         display: inline-block;
-        padding: 0.9em 0;
+        padding: .8em 0;
         text-align: center;
         width: 160px;
         border-radius: 4px;
-        margin: 0em 1em;
+        margin: 0 auto;
     }
     
     #contacts {
-        padding: 10vh 3em;
+        padding: 10vh 1em;
     }
     
     .contacts-details {
@@ -515,42 +577,6 @@
     
     form {
         position: relative;
-    }
-    
-    .notification {
-        position: absolute;
-        top: 5.2em;
-        left: 1em;
-        font-size: .8rem;
-        padding: .4em 0;
-        width: 200px;
-        border-radius: 3px;
-        transform: scaleY(0) translateY(-40px);
-        transform-origin: top;
-        transition: 300ms;
-    }
-    
-    .notify.notification {
-        animation: showNot 200ms 0ms ease-in forwards;
-    }
-    
-    @keyframes showNot {
-        to {
-            transform: scaleY(1) translateY(0);
-        }
-    }
-    
-    .sending {
-        color: var(--success);
-        font-weight: bold;
-    }
-    
-    .sent {
-        color: var(--success);
-    }
-    
-    .not-sent {
-        color: var(--error);
     }
     
     form label {
@@ -623,12 +649,39 @@
     
     .submit {
         display: block;
-        padding: 1.2em 0;
-        width: 250px;
+        position: relative;
+        padding: 1.1em 4em;
         background-color: var(--mainOrange);
         border-radius: 4px;
         margin-top: 1em;
         transform: opacity 200ms ease-in-out;
+    }
+    
+    .submit.sending {
+        background-color: #fd7b5d;
+        pointer-events: none;
+    }
+    
+    .submit svg {
+        display: none;
+        animation: rotate 1000ms linear infinite;
+    }
+    
+    @keyframes rotate {
+        to {
+            transform: translate(-50%, -50%) rotateZ(360deg);
+        }
+    }
+    
+    .submit.sending svg {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: inherit;
+        height: 30px;
+        width: 30px;
     }
     
     .submit:hover {
@@ -727,21 +780,22 @@
             display: flex;
             justify-content: space-evenly;
         }
+        #contacts {
+            padding: 10vh 3em;
+        }
     }
     
     @media (min-width:920px) {
         .project>section {
-            display: flex;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 2em;
         }
         .project-photo {
-            width: 450px;
+            max-width: 600px;
         }
         .project:nth-child(odd) .project-photo {
             order: 2;
-        }
-        .more-projects {
-            margin: 3em calc(50vw - 65px);
         }
         .side-nav {
             position: fixed;
@@ -776,9 +830,6 @@
         }
         .contacts-details {
             grid-template-columns: 1fr;
-        }
-        #contacts {
-            padding-left: 0;
         }
         .contacts-details {
             place-items: center;
