@@ -141,27 +141,25 @@ body {
 header {
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 100vw;
     height: 80px;
     z-index: 100;
     display: flex;
     align-items: center;
     justify-content: left;
-    box-shadow: 0px .4px 1.5px #ccc;
 }
 
 header.scrolled {
     position: fixed;
     background-color: var(--darkGray);
     transform-origin: top;
+    clip-path: polygon(0 0, 100% 0%, 100% 0, 0 0);
     animation: head 300ms ease-in-out forwards;
 }
 
 @keyframes head {
-    from {
-        transform: scaleY(.5);
-    }
     to {
+        clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
         transform: scaleY(1);
     }
 }
@@ -198,6 +196,24 @@ header.scrolled {
     font-size: .8rem;
     background-color: #fff;
     animation: noti 300ms ease-in-out forwards;
+}
+
+.notification::after {
+    position: absolute;
+    content: "";
+    bottom: 0px;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: inherit;
+    background-color: var(--mainYellow);
+    animation: timer 9000ms forwards;
+}
+
+@keyframes timer {
+    to {
+        width: 0;
+    }
 }
 
 .notification.success {
@@ -285,12 +301,12 @@ ul {
 .small-menu {
     background-color: var(--darkGray);
     position: fixed;
-    top: 81px;
-    left: 0;
-    width: 100vw;
+    top: 80px;
+    right: 0;
+    width: 320px;
     height: 100vh;
     z-index: 210;
-    padding: 2em 1em;
+    padding: 2em;
     transform: translateX(110vw);
     transition: transform 400ms ease-in-out;
     display: block;
@@ -412,19 +428,32 @@ h1,
 }
 
 #hero {
-    padding: 85px 1em 1em 1em;
+    padding: 125px 1em 1em 1em;
     line-height: 1.5;
     position: relative;
     overflow: hidden;
 }
 
+.hi {
+    display: inline-flex;
+    align-items: flex-end;
+    position: relative;
+    animation: greet 800ms 500ms linear alternate-reverse infinite;
+}
+
+.hi svg {
+    height: 2.5rem;
+}
+
+@keyframes greet {
+    to {
+        transform: rotateZ(30deg);
+    }
+}
+
 #hero h3 {
     font-size: 2.5rem;
     font-weight: normal;
-}
-
-#hero p {
-    font-size: 1.3rem;
 }
 
 #hero h3.highlight {
@@ -441,34 +470,50 @@ main h2 {
     font-family: 'Comfortaa', serif;
 }
 
-#hero button {
+.action {
     padding: 1.4em 3em;
     margin-top: 2em;
     background: transparent;
-    border-radius: 2px;
+    border-radius: 4px;
     transition: 400ms ease-in-out;
-}
-
-.gradient-button {
     position: relative;
     overflow: hidden;
-    z-index: 5;
 }
 
-.gradient-button::after {
+.action::after,
+.action::before {
     position: absolute;
     content: '';
-    left: -80px;
-    right: -80px;
-    top: -80px;
-    bottom: -80px;
-    background: var(--gradient);
-    transition: 600ms linear;
-    z-index: -1;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    border-radius: inherit;
 }
 
-.gradient-button:hover::after {
-    transform: rotateZ(540deg);
+.action::before {
+    z-index: -1;
+    background: var(--mainOrange);
+    transition: 200ms 300ms linear;
+}
+
+.action::after {
+    background: var(--gradient);
+    transition: transform 300ms linear;
+    z-index: -2;
+}
+
+.action:hover::before {
+    transition-delay: 0ms;
+    top: 1.5px;
+    left: 1.5px;
+    bottom: 1.5px;
+    right: 1.5px;
+    background: #000;
+}
+
+.action:hover::after {
+    transform: rotateZ(180deg);
 }
 
 .about {
@@ -582,6 +627,7 @@ main h2 {
 }
 
 a.more-projects {
+    background-color: var(--mainOrange);
     display: inline-block;
     padding: .8em 0;
     text-align: center;
@@ -798,16 +844,16 @@ footer {
             opacity: 0.2;
         }
     }
-    .bubble.action::after {
+    .bubble.showing::after {
         transform: translate(-50%, 65px);
         animation: none;
     }
-    .bubble.action {
+    .bubble.showing {
         height: 100px;
         transform-origin: bottom;
-        animation: disapear 500ms 300ms forwards;
+        animation: disappear 500ms 300ms forwards;
     }
-    @keyframes disapear {
+    @keyframes disappear {
         to {
             transform: translate(-50%, 100%);
             opacity: 0;
@@ -815,6 +861,7 @@ footer {
     }
     #hero {
         line-height: 1.8;
+        padding-top: 80px;
     }
     .skills {
         display: flex;

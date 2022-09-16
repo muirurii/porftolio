@@ -28,7 +28,7 @@ const bubble = document.querySelector(".bubble");
 
 const headerObserver = new IntersectionObserver((entry) => {
     header.className = !entry[0].isIntersecting ? "scrolled" : "";
-    bubble.className = !entry[0].isIntersecting ? "action bubble" : "bubble";
+    bubble.className = !entry[0].isIntersecting ? "showing bubble" : "bubble";
 });
 
 headerObserver.observe(mark);
@@ -101,7 +101,7 @@ const notificationContainer = document.querySelector(".notification-container");
 
 //Notifications
 
-const toogleNotification = (element) => {
+const toggleNotification = (element) => {
     element.classList.add("animate-hide");
 
     const isElementActive = Array.from(notificationContainer.childNodes).some(
@@ -115,7 +115,7 @@ const toogleNotification = (element) => {
 
 const closeNotification = (e) => {
     if (!e.target.classList.contains("close-not")) return;
-    toogleNotification(e.target.parentElement);
+    toggleNotification(e.target.parentElement);
 };
 
 notificationContainer.addEventListener("click", closeNotification);
@@ -134,7 +134,7 @@ const addNotification = (text, type) => {
     } else {
         notificationContainer.insertBefore(notification, last);
     }
-    setTimeout(() => toogleNotification(notification), 9000);
+    setTimeout(() => toggleNotification(notification), 8000);
 };
 
 //Send Mail
