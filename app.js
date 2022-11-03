@@ -1,17 +1,3 @@
-let lastScroll = 0;
-let timeout;
-
-window.addEventListener("scroll", (e) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
-        const scrollDiff = window.scrollY - lastScroll;
-        const direction =
-            Math.sign(scrollDiff) === -1 && scrollDiff > 40 ? "up" : "down";
-        console.log(direction);
-        lastScroll = window.scrollY;
-    }, 500);
-});
-
 //Call to action
 
 document.querySelector(".action").addEventListener("click", () => {
