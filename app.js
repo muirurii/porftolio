@@ -6,18 +6,52 @@ document.querySelector(".action").addEventListener("click", () => {
     document.querySelectorAll("input")[0].focus();
 });
 
-//Header
+//Small menu
 
-const header = document.querySelector("header");
-const mark = document.querySelector(".mark");
-const bubble = document.querySelector(".bubble");
+const menu = document.querySelector(".small-menu");
+const hamburger = document.querySelector(".hamb");
+let isMenuOpen = false;
 
-const headerObserver = new IntersectionObserver((entry) => {
-    header.className = !entry[0].isIntersecting ? "scrolled" : "";
-    bubble.className = !entry[0].isIntersecting ? "showing bubble" : "bubble";
+const toggleMenu = () => {
+    if (!isMenuOpen) {
+        menu.classList.add("show");
+        hamburger.classList.add("closed");
+    } else {
+        menu.classList.remove("show");
+        hamburger.classList.remove("closed");
+    }
+    isMenuOpen = !isMenuOpen;
+};
+
+hamburger.addEventListener("click", (e) => {
+    toggleMenu();
 });
 
-headerObserver.observe(mark);
+menu.addEventListener("click", toggleMenu);
+
+// Hide header on scroll down
+
+const header = document.querySelector("header");
+const bubble = document.querySelector(".bubble");
+
+let prevScrollPos = window.pageYOffset;
+const headerBottom = header.offsetTop + header.offsetHeight;
+let scrollTimeout;
+
+const handleOnScroll = () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        const currentScrollPos = window.pageYOffset;
+        const isInHomeView = currentScrollPos < 300;
+        const hasScrolledUp = prevScrollPos + 20 > currentScrollPos;
+        bubble.className = !isInHomeView ? "showing bubble" : "bubble";
+        header.className =
+            hasScrolledUp || isInHomeView || isMenuOpen ? "scrolled" : "";
+        prevScrollPos = currentScrollPos;
+    }, 100);
+};
+
+window.addEventListener("scroll", handleOnScroll);
 
 //Bubble scroll
 
@@ -26,31 +60,6 @@ const about = document.getElementById("about");
 bubble.addEventListener("click", () => {
     const toAbout = about.offsetTop;
     window.scrollTo(0, toAbout);
-});
-
-//Small menu
-
-const menu = document.querySelector(".small-menu");
-const hamburger = document.querySelector(".hamb");
-
-const closeMenu = () => {
-    menu.classList.remove("show");
-    hamburger.classList.remove("closed");
-};
-
-hamburger.addEventListener("click", (e) => {
-    if (e.target.classList.contains("closed")) {
-        closeMenu();
-    } else {
-        menu.classList.add("show");
-        e.target.classList.add("closed");
-    }
-});
-
-//close menu on link click
-
-menu.querySelectorAll("a").forEach((li) => {
-    li.addEventListener("click", closeMenu);
 });
 
 //Side Menu
@@ -76,6 +85,12 @@ const sectionsObserver = new IntersectionObserver(
 );
 
 sections.forEach((card) => sectionsObserver.observe(card));
+
+//Loader
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelector(".document").style.display = "block";
+    document.querySelector(".container").style.display = "none";
+});
 
 //Email form
 const form = document.querySelector("form");
@@ -132,9 +147,13 @@ const setSending = (value) => {
         sendButton.classList.remove("sending");
 };
 
-const validateTexts = (element) => {
+const validateTexts = (element, notify) => {
     if (element.value.trim().length < 3) {
-        element.parentElement.classList.add("error");
+        element.parentElement.classList.remove("error");
+        setTimeout(() => {
+            element.parentElement.classList.add("error");
+        }, 50);
+        notify && addNotification(`Please enter a valid ${element.id}`, "error");
         return false;
     } else {
         element.parentElement.classList.remove("error");
@@ -142,42 +161,59 @@ const validateTexts = (element) => {
     }
 };
 
-const validateEmail = (element) => {
+const validateEmail = (element, notify) => {
     const regex =
         /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if (!regex.test(element.value)) {
-        element.parentElement.classList.add("error");
+        element.parentElement.classList.remove("error");
+        setTimeout(() => {
+            element.parentElement.classList.add("error");
+        }, 50);
+        notify && addNotification("Please enter a valid email", "error");
         return false;
     } else {
         element.parentElement.classList.remove("error");
         return true;
     }
 };
+
+let keyDownTimeout;
+
+const handleInput = (e) => {
+    clearTimeout(keyDownTimeout);
+    keyDownTimeout = setTimeout(() => {
+        e.target.id === "email" ?
+            validateEmail(e.target, false) :
+            validateTexts(e.target, false);
+    }, 500);
+};
+
+from_name.addEventListener("keyup", handleInput);
+reply_to.addEventListener("keyup", handleInput);
+message.addEventListener("keyup", handleInput);
 
 (function() {
     emailjs.init("user_GiEJaeXXJLtqsyGtlxZyd");
 })();
 
+const clearFields = () => {
+    reply_to.value = "";
+    message.value = "";
+    from_name.value = "";
+};
+
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    const checkEmail = validateEmail(reply_to);
-    const checkMessage = validateTexts(message);
-    const validateName = validateTexts(from_name);
-    if (!checkEmail || !checkMessage || !validateName)
-        return addNotification("Please fix the errors", "error");
+    const checkEmail = validateEmail(reply_to, true);
+    const checkMessage = validateTexts(message, true);
+    const validateName = validateTexts(from_name, true);
+    if (!checkEmail || !checkMessage || !validateName) return;
 
     const templateParams = {
         from_name: from_name.value,
         message: message.value,
         reply_to: reply_to.value,
         to_name: "Peter",
-    };
-
-    const clearFields = () => {
-        reply_to.value = "";
-        message.value = "";
-        from_name.value = "";
     };
 
     setSending(true);
@@ -193,10 +229,4 @@ form.addEventListener("submit", (e) => {
             setSending(false);
         }
     );
-});
-
-//Loader
-document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector(".document").style.display = "block";
-    document.querySelector(".container").style.display = "none";
 });
