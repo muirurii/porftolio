@@ -171,14 +171,25 @@ header.scrolled {
 }
 
 .logo h1 {
-    font-family: 'Sacramento', serif;
     font-size: 3rem;
     font-weight: normal;
-    font-style: italic;
 }
 
 .logo a {
     display: inline-block;
+    position: relative;
+}
+
+.logo a::before {
+    content: "";
+    position: absolute;
+    height: 21px;
+    width: 21px;
+    border-radius: 50%;
+    background: var(--gradient);
+    top: 18px;
+    left: 7px;
+    transform: scale(0.7);
 }
 
 .notification-container {
@@ -439,21 +450,10 @@ h1,
 }
 
 #hero {
-    padding: 125px 0.5em 1em 0.5em;
+    padding: 80px 0.5em 1em 0.5em;
     line-height: 1.5;
     position: relative;
     overflow: hidden;
-}
-
-.hi {
-    display: inline-flex;
-    align-items: flex-end;
-    position: relative;
-    animation: greet 800ms 500ms linear alternate-reverse infinite;
-}
-
-.hi svg {
-    height: 2.5rem;
 }
 
 @keyframes greet {
@@ -570,6 +570,8 @@ main h2 {
 }
 
 .my-projects {
+    display: grid;
+    gap: 2em;
     padding: 0 .5em;
 }
 
@@ -638,7 +640,7 @@ a.more-projects {
     display: inline-block;
     padding: .8em 0;
     text-align: center;
-    width: 160px;
+    width: 130px;
     border-radius: 4px;
 }
 
@@ -876,7 +878,6 @@ footer {
     }
     #hero {
         line-height: 1.8;
-        padding-top: 80px;
     }
     .about {
         justify-content: space-evenly;
@@ -899,7 +900,7 @@ footer {
     .project>section {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: 2em;
+        grid-gap: 4em;
     }
     .project-photo {
         max-width: 600px;
@@ -953,7 +954,19 @@ footer {
 }
 
 @media (max-width:400px) {
-    /* form, */
+    #hero h3,
+    #hero h3.highlight {
+        font-size: 2.2rem;
+    }
+    .action {
+        padding: 1.2em 2em;
+    }
+    .action:hover::before {
+        top: 1px;
+        left: 1px;
+        bottom: 1px;
+        right: 1px;
+    }
     .social-icons {
         width: 300px;
     }
