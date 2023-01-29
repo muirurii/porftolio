@@ -62,30 +62,6 @@ bubble.addEventListener("click", () => {
     window.scrollTo(0, toAbout);
 });
 
-//Side Menu
-
-const sections = document.querySelectorAll("main>section");
-const sideNav = document.querySelector(".side-nav");
-
-const sectionsObserver = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                if (entry.intersectionRect < 400) return;
-                const active = document.querySelector(".active");
-                const id = entry.target.id;
-                const activeNow = sideNav.querySelector(`a[href*="${id}"]`);
-                active !== null && active.classList.remove("active");
-                activeNow.classList.add("active");
-            }
-        });
-    }, {
-        threshold: 0.43,
-    }
-);
-
-sections.forEach((card) => sectionsObserver.observe(card));
-
 //Loader
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".document").style.display = "block";
